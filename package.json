@@ -10,10 +10,10 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "subrepo-service-clone": "git subrepo clone git@github.com:Rengod95/ExpoSubRepo-OutboundLib.git src/app/View/lib",
+    "subrepo-service-clone": "git subrepo clone git@github.com:Rengod95/ExpoSubRepo-OutboundLib.git src/Service/lib",
     "subrepo-service-push": "git subrepo push src/Service/lib",
     "subrepo-service-pull": "git subrepo pull src/Service/lib",
-    "subrepo-component-clone": "git subrepo clone git@github.com:Rengod95/ExpoSubRepo-ComponentLib.git src/Service/lib",
+    "subrepo-component-clone": "git subrepo clone git@github.com:Rengod95/ExpoSubRepo-ComponentLib.git src/app/View/lib",
     "subrepo-component-push": "git subrepo push src/app/View/lib",
     "subrepo-component-pull": "git subrepo pull src/app/View/lib"
   },
