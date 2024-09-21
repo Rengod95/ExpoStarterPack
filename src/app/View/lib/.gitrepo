@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Rengod95/ExpoSubRepo-ComponentLib.git
 	branch = main
-	commit = 548d1fb4d63fb11403d031d886ed4888b425cb75
-	parent = 5eb2084274cbcb6d9560b0f596a7e2471526493c
+	commit = f66f16f6aaabd988501a5abd62a13e78e36a22f5
+	parent = 06a9270a7a7276e9438e6793c8667b9dc27c89d5
 	method = merge
 	cmdver = 0.4.9
