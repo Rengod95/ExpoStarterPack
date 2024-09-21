@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Rengod95/ExpoSubRepo-OutboundLib.git
 	branch = main
-	commit = fe7f4fd85e716c541438467fcfed97f23dca7b99
-	parent = 221bee8b1dbb761c2a2577446df218921bc85b89
+	commit = 364304eaacb4f4c27e2c59233ae943d6b6d3dc97
+	parent = e5d3f582472546cc149ffacd238b1bf373219b12
 	method = merge
 	cmdver = 0.4.9
