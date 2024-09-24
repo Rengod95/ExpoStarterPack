@@ -1,5 +1,5 @@
 import {Tabs} from 'expo-router';
-import {GlobalBottomTabBar} from '@/app/View/Router/BottomTabButton.tsx';
+import {GlobalBottomTabBar} from '@/app/View/lib/Router/BottomTabButton.tsx';
 import {RouteService} from '@/Service/lib/Route/Adapter.ts';
 import {View} from 'tamagui';
 
