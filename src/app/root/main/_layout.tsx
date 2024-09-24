@@ -10,7 +10,7 @@ export const unstable_settings = {
 const RootMainLayout = observer(() => {
   const AuthStore = useGlobalStore('AuthStore');
 
-  if (!AuthStore.isSessionValid && AuthService.getInstance().isServiceActivated) {
+  if (!AuthStore.isSessionValid && AuthService.getInstance().isServiceActivated !== 'none') {
     return <Redirect href={'/root/auth'} />;
   }
 

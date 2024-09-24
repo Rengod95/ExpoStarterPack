@@ -1,7 +1,7 @@
 import {ExpoConfig, ConfigContext} from 'expo/config';
 
-const APP_NAME = '';
-const APP_SLUG = '';
+const APP_NAME = 'starterpack';
+const APP_SLUG = 'starterpack';
 
 type Plugin = string | [string, any] | [] | [string];
 
@@ -25,8 +25,6 @@ const TRACKING_TRANSPARENCY_PLUGIN: Plugin = [
 const FIREBASE_APP_PLUGIN: Plugin = '@react-native-firebase/app';
 const FIREBASE_AUTH_PLUGIN: Plugin = '@react-native-firebase/auth';
 const FIREBASE_CRASH_PLUGIN: Plugin = '@react-native-firebase/crashlytics';
-
-const FIREBASE_PLUGINS: Plugin[] = process.env.EXPO_PUBLIC_USE_AUTH ? [FIREBASE_APP_PLUGIN, FIREBASE_AUTH_PLUGIN, FIREBASE_CRASH_PLUGIN] : [];
 
 // 소셜로그인
 // TODO-P : 파이어베이스와 연동되므로 서비스 파일 삽입 후 정상동작
@@ -53,7 +51,7 @@ const EXPO_BUILD_PROPERTIES_PLUGIN: Plugin = [
 const ADMOB_PLUGIN: Plugin = [
   'react-native-google-mobile-ads',
   {
-    //TODO-P : 애드몹 프로젝트 생성 및 아래 APPID 삽입 필요
+    //TODO-P : 애드몹 프로젝트 생성 및 아래 APPID 삽입 필요, 삽입 안하면 앱 바로 꺼짐
     androidAppId: 'ca-app-pub-xxxxxxxx~xxxxxxxx',
     iosAppId: 'ca-app-pub-xxxxxxxx~xxxxxxxx',
     userTrackingUsageDescription: 'This identifier will be used to deliver personalized ads to you.',
@@ -111,29 +109,57 @@ const ADMOB_PLUGIN: Plugin = [
   },
 ];
 
-export default ({config}: ConfigContext): ExpoConfig => ({
-  ...config,
-  name: APP_NAME,
-  slug: APP_SLUG,
-  android: {
-    ...config.android,
-    // TODO-P: 파이어베이스 프로젝트 설정 후 서비스 파일 삽입 필요
-    googleServicesFile: './google-services.json',
-  },
-  ios: {
-    ...config.ios,
-    usesAppleSignIn: true,
-    // TODO-P: 파이어베이스 프로젝트 설정 후 서비스 파일 삽입 필요
-    googleServicesFile: './GoogleService-Info.plist',
-  },
-  plugins: [
-    ...(config.plugins as []),
-    ...FIREBASE_PLUGINS,
-    FONT_PLUGIN,
-    TRACKING_TRANSPARENCY_PLUGIN,
-    EXPO_BUILD_PROPERTIES_PLUGIN,
-    GOOGLE_SIGNIN_PLUGIN,
-    APPLE_SIGNIN_PLUGIN,
-    ADMOB_PLUGIN,
-  ],
-});
+export default ({config}: ConfigContext): ExpoConfig => {
+  const FIREBASE_PLUGINS: Plugin[] = process.env.USE_AUTH ? [FIREBASE_APP_PLUGIN, FIREBASE_AUTH_PLUGIN, FIREBASE_CRASH_PLUGIN] : [];
+
+  if (process.env.EXPO_PUBLIC_USE_AUTH === 'firebase') {
+    return {
+      ...config,
+      name: 'auth',
+      slug: APP_SLUG,
+      android: {
+        ...config.android,
+        // TODO-P: 파이어베이스 프로젝트 설정 후 서비스 파일 삽입 필요
+        googleServicesFile: './google-services.json',
+      },
+      ios: {
+        ...config.ios,
+        usesAppleSignIn: true,
+        // TODO-P: 파이어베이스 프로젝트 설정 후 서비스 파일 삽입 필요
+        googleServicesFile: './GoogleService-Info.plist',
+      },
+      plugins: [
+        ...(config.plugins as []),
+        ...FIREBASE_PLUGINS,
+        FONT_PLUGIN,
+        TRACKING_TRANSPARENCY_PLUGIN,
+        EXPO_BUILD_PROPERTIES_PLUGIN,
+        GOOGLE_SIGNIN_PLUGIN,
+        APPLE_SIGNIN_PLUGIN,
+        ADMOB_PLUGIN,
+      ],
+    };
+  }
+
+  return {
+    ...config,
+    name: APP_NAME,
+    slug: APP_SLUG,
+    android: {
+      ...config.android,
+    },
+    ios: {
+      ...config.ios,
+      usesAppleSignIn: true,
+    },
+    plugins: [
+      ...(config.plugins as []),
+      FONT_PLUGIN,
+      TRACKING_TRANSPARENCY_PLUGIN,
+      EXPO_BUILD_PROPERTIES_PLUGIN,
+      GOOGLE_SIGNIN_PLUGIN,
+      APPLE_SIGNIN_PLUGIN,
+      ADMOB_PLUGIN,
+    ],
+  };
+};

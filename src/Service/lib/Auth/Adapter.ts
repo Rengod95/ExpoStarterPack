@@ -143,7 +143,7 @@ export class AuthService extends InitializationSingleTon<AuthService> {
 
   public async invokeSignInEffect(user: FirebaseAuthTypes.User, idToken: IdToken) {
     try {
-      if (this.useExternalValidator) {
+      if (this.useExternalValidator === 'use') {
         VariantService.invariant(this.validator, {type: 'error', message: '벨리데이터 함수 할당되지 않은 상태로 invokeSignInEffect 접근'});
         const res = await this.validator(user, idToken);
         API.setDefaultAuthorizationHeader(res);
@@ -163,7 +163,7 @@ export class AuthService extends InitializationSingleTon<AuthService> {
 
   public async checkSessionOnMount() {
     try {
-      VariantService.invariant(this.isServiceActivated, {type: 'log', message: 'AuthService 비활성화됨. checkSessionOnMount 진입'});
+      VariantService.invariant(this.isServiceActivated !== 'none', {type: 'log', message: 'AuthService 비활성화됨. checkSessionOnMount 진입'});
       const idTokenFromStorage = await this.getStoredIdTokenOnStorage();
       if (idTokenFromStorage) {
         const user = auth().currentUser;
@@ -182,8 +182,8 @@ export class AuthService extends InitializationSingleTon<AuthService> {
 
   //TODO : 세션 체킹 로직 수정
   override async initialize(): Promise<void> {
-    if (this.isServiceActivated) return;
-    if (this.useExternalValidator && !this.validator) {
+    if (this.isServiceActivated === 'none') return;
+    if (this.useExternalValidator === 'use' && !this.validator) {
       VariantService.invariant(this.validator, {type: 'error', message: 'no validator allocated on AuthService before initializing'});
     }
   }

@@ -23,3 +23,7 @@ web-build/
 expo-env.d.ts
 # @end expo-cli
 .idea
+
+# 서브레포는 직접 클론해야 함
+src/Service/lib
+src/app/View/lib
