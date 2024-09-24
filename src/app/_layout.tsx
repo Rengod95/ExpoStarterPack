@@ -24,6 +24,7 @@ if (Platform.OS === 'web') {
 SplashScreen.preventAutoHideAsync();
 
 registerServices();
+// configureExternalAuthValidator()
 configuretGoogleSignin();
 
 export const unstable_settings = {

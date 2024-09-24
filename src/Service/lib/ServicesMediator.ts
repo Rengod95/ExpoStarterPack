@@ -1,5 +1,5 @@
-import {InitializationSingleTon} from '@/Service/shared.ts';
-import {VariantService} from '@/Service/Outbound/Invariant/Adapter.ts';
+import {InitializationSingleTon} from '@/Service/lib/shared.ts';
+import {VariantService} from '@/Service/lib/Invariant/Adapter.ts';
 
 export class ServiceMediator {
   private services: Set<InitializationSingleTon<any>> = new Set();

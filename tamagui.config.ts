@@ -90,7 +90,7 @@ import {
   light_TextArea,
   light_TooltipArrow,
   light_TooltipContent,
-} from '@/app/Theme/theme-output.ts';
+} from '@/app/View/Theme/theme-output.ts';
 import {createFont} from '@tamagui/core';
 import {
   dark2,
@@ -137,7 +137,7 @@ import {
   light2_TextArea,
   light2_TooltipArrow,
   light2_TooltipContent,
-} from '@/app/Theme/theme-output-2-result.ts';
+} from '@/app/View/Theme/theme-output-2-result.ts';
 
 type Theme = {
   accentBackground: string;

@@ -3,7 +3,7 @@ import {ExpoConfig, ConfigContext} from 'expo/config';
 const APP_NAME = '';
 const APP_SLUG = '';
 
-type Plugin = [string, any] | string;
+type Plugin = string | [string, any] | [] | [string];
 
 // 폰트
 const FONT_PLUGIN: Plugin = [
@@ -25,6 +25,8 @@ const TRACKING_TRANSPARENCY_PLUGIN: Plugin = [
 const FIREBASE_APP_PLUGIN: Plugin = '@react-native-firebase/app';
 const FIREBASE_AUTH_PLUGIN: Plugin = '@react-native-firebase/auth';
 const FIREBASE_CRASH_PLUGIN: Plugin = '@react-native-firebase/crashlytics';
+
+const FIREBASE_PLUGINS: Plugin[] = process.env.EXPO_PUBLIC_USE_AUTH ? [FIREBASE_APP_PLUGIN, FIREBASE_AUTH_PLUGIN, FIREBASE_CRASH_PLUGIN] : [];
 
 // 소셜로그인
 // TODO-P : 파이어베이스와 연동되므로 서비스 파일 삽입 후 정상동작
@@ -126,11 +128,9 @@ export default ({config}: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     ...(config.plugins as []),
+    ...FIREBASE_PLUGINS,
     FONT_PLUGIN,
     TRACKING_TRANSPARENCY_PLUGIN,
-    FIREBASE_APP_PLUGIN,
-    FIREBASE_AUTH_PLUGIN,
-    FIREBASE_CRASH_PLUGIN,
     EXPO_BUILD_PROPERTIES_PLUGIN,
     GOOGLE_SIGNIN_PLUGIN,
     APPLE_SIGNIN_PLUGIN,
